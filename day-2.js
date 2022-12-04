@@ -2522,6 +2522,8 @@ const scoreMap = {
     'C': 3
 }
 
+
+
 const getOutcomeScore = (a, b) => {
     if (scoreMap[a] === scoreMap[b]) return 3
     if (((scoreMap[b] > scoreMap[a]) || (b === 'X' && a === 'C')) && !(b === 'Z' && a === 'A')) return 6
@@ -2537,4 +2539,26 @@ const calcScore = (a, b) => {
 
 const totalScore = tuples.reduce((acc, curr) => acc + calcScore(curr[0], curr[2]), 0)
 
-console.log(totalScore)
+
+// Part 2
+const moves = ['A', 'B', 'C']
+const moveToIndexMap = {
+    'A': 0,
+    'B': 1,
+    'C': 2,
+}
+
+const getScore = (oppoMove, outcome) => {
+    const oppoMoveIndex = moveToIndexMap[oppoMove]
+    switch(outcome) {
+        case 'X': // lose
+            return scoreMap[moves[oppoMoveIndex - 1] || moves[moves.length - 1]]
+        case 'Y': // tie
+            return 3 + scoreMap[oppoMove]
+        case 'Z': // win
+            return 6 + scoreMap[moves[oppoMoveIndex + 1] || moves[0]]
+    }
+}
+
+const scorePartTwo = tuples.reduce((acc, curr) => acc + getScore(curr[0], curr[2]), 0)
+console.log(scorePartTwo)
