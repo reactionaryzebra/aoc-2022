@@ -1014,4 +1014,25 @@ const checkOverlap = arr => {
 
 
 const score = tuples.reduce((acc, curr) => acc + checkOverlap(sanitize(curr)), 0)
-console.log(score)
+
+// Part 2
+const generateArray = tuple => {
+    const arr = []
+    for (let i = tuple[0]; i <= tuple[1]; i++) {
+        arr.push(i)
+    }
+    return arr
+}
+
+const checkOverlapTwo = arr => {
+    const arrA = generateArray(arr.slice(0, 2))
+    const arrB = generateArray(arr.slice(2))
+    const setA = new Set(arrA)
+    for (let i of arrB) {
+        if (setA.has(i)) return 1
+    }
+    return 0
+}
+
+const scoreTwo = tuples.reduce((acc, curr) => acc + checkOverlapTwo(sanitize(curr)), 0)
+console.log(scoreTwo)
