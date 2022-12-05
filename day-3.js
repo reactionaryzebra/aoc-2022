@@ -319,4 +319,21 @@ const splitPack = str => {
 
 const score = splitInput.reduce((acc, curr) => acc + getPriority(getOverlap(splitPack(curr))), 0)
 
-console.log(score)
+// Part 2
+const getOverlapModified = (triple) => {
+    const arrA = triple[0].split('')
+    const arrB = triple[1].split('')
+    const arrC = triple[2].split('')
+    const setA = new Set(arrA)
+    const setB = new Set(arrB)
+    return arrC.find(val => setA.has(val) && setB.has(val))
+}
+
+const chunkedInput = []
+let i = 0
+while (i < splitInput.length) {
+    chunkedInput.push(splitInput.slice(i, i += 3))
+}
+const scorePartTwo = chunkedInput.reduce((acc, curr) => acc + getPriority(getOverlapModified(curr)), 0)
+
+console.log(scorePartTwo)
