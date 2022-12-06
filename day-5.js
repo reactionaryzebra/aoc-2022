@@ -529,7 +529,9 @@ const finalStacks = moves.reduce((acc, curr) => {
     const fromStack = acc[from]
     const toStack = acc[to]
     const newFromStack = [...fromStack.slice(count)]
-    const newToStack = [...fromStack.slice(0, count).reverse(), ...toStack]
+    const newToStack = [...fromStack.slice(0, count), ...toStack]
+    // Part 1
+    // const newToStack = [...fromStack.slice(0, count).reverse(), ...toStack]
     acc[from] = newFromStack
     acc[to] = newToStack
     return acc
@@ -537,4 +539,3 @@ const finalStacks = moves.reduce((acc, curr) => {
 
 const toppers = finalStacks.reduce((acc, curr) => acc + curr[0], '')
 
-console.log(toppers)
