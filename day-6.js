@@ -12,7 +12,9 @@ const getPacketEndIndex = str => {
             continue;
         }
         map[str[count]] = count
-        if( Object.keys(map).length === 4) {
+        if ( Object.keys(map).length === 4) {
+        // Part 2
+        // if( Object.keys(map).length === 14) {
             return count + 1
         }
     }
